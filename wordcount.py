@@ -51,7 +51,25 @@ import sys
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
+def create_dict(filename):
+    word_dict = {}
+    with open(filename, "r") as f:
+        word_list = f.read().lower().split()
+        for word in word_list:
+            if word in word_dict:
+                word_dict[word] += 1
+            else:
+                word_dict[word] = 1
+    return word_dict
 
+def print_words(word_dict):
+    for keys, values in word_dict.items():
+        print(keys + " : " + str(values))
+
+def print_top(word_dict):
+    twenty_most_highest = Counter(word_dict).most_common(20)
+    for keys, values in twenty_most_highest:
+        print(keys + " : " + str(values))
 
 def main():
     if len(sys.argv) != 3:
