@@ -40,6 +40,7 @@ print_words() and print_top().
 """
 
 import sys
+from collections import Counter
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
@@ -66,6 +67,7 @@ def print_words(word_dict):
     for keys, values in word_dict.items():
         print(keys + " : " + str(values))
 
+
 def print_top(word_dict):
     twenty_most_highest = Counter(word_dict).most_common(20)
     for keys, values in twenty_most_highest:
@@ -73,17 +75,18 @@ def print_top(word_dict):
 
 def main():
     if len(sys.argv) != 3:
-        print 'usage: python wordcount.py {--count | --topcount} file'
+        print('usage: python wordcount.py {--count | --topcount} file')
         sys.exit(1)
 
     option = sys.argv[1]
     filename = sys.argv[2]
+    my_dict = create_dict(filename)
     if option == '--count':
-        print_words(filename)
+        print_words(my_dict)
     elif option == '--topcount':
-        print_top(filename)
+        print_top(my_dict)
     else:
-        print 'unknown option: ' + option
+        print('unknown option: ' + option)
         sys.exit(1)
 
 
